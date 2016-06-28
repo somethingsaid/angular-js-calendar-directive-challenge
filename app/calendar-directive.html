@@ -1,0 +1,13 @@
+<h1>Current selection: {{selectedDate}}</h1>
+<section class='nav'>
+	<select class='month'
+	    ng-model='selectedDate.month'>
+		<option ng-selected="{{month == selectedDate.month}}" ng-repeat="month in optionMonths" value="{{month}}">{{month}}</option>
+	</select>
+	<select class='year'
+	    ng-model='selectedDate.year'>
+		<option ng-selected="{{year == selectedDate.year}}" ng-repeat="year in optionYears" value="{{year}}">{{year}}</option>
+	</select>
+</section>
+<section class='calendar'>
+</section>
