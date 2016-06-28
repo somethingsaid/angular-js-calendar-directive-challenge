@@ -13,20 +13,23 @@ myApp.directive('customCalendar', function() {
 			// Setting up variables for calendar to display current month
 			var d = new Date();
 			$scope.selectedDate = {};
-			$scope.current = {};
-			$scope.current.month = $scope.optionMonths[d.getMonth()];
-			$scope.current.year = d.getFullYear();
+			var current = {};
+			current.month = $scope.optionMonths[d.getMonth()];
+			current.year = d.getFullYear();
 
-			$scope.selectedDate.month = $scope.current.month;
-			$scope.selectedDate.year = $scope.current.year;
+			$scope.selectedDate.month = current.month;
+			$scope.selectedDate.year = current.year;
 
 			// Giving a range of 20 years in dropdown menu
 			$scope.optionYears = [];
-			for (var i = $scope.current.year - 20; i <= $scope.current.year + 20; i++) {
+			for (var i = current.year - 20; i <= current.year + 20; i++) {
 				$scope.optionYears.push(i);
 			}
 
 			// Sense checking
+			$scope.dateChanged = function () {
+				console.log('Selected Date has changed: ' + JSON.stringify($scope.selectedDate));
+			};
 			console.log('Months: ' +  $scope.optionMonths);
 			console.log('Years: ' +  $scope.optionYears);
 		}
