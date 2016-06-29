@@ -19,6 +19,8 @@ myApp.directive('customCalendar', function() {
 
 			$scope.selectedDate.month = current.month;
 			$scope.selectedDate.year = current.year;
+			$scope.range = CalendarRange.getMonthlyRange(new Date(current.year, $scope.optionMonths.indexOf(current.month)));
+			console.log('Initial date range: ' + JSON.stringify($scope.range));
 
 			// Giving a range of 20 years in dropdown menu
 			$scope.optionYears = [];
@@ -26,10 +28,13 @@ myApp.directive('customCalendar', function() {
 				$scope.optionYears.push(i);
 			}
 
-			// Sense checking
+			// Get calendar range of selected month:
 			$scope.dateChanged = function () {
 				// tied to ng-change in template
+				console.clear();
 				console.log('Selected Date has changed: ' + JSON.stringify($scope.selectedDate));
+				$scope.range = CalendarRange.getMonthlyRange(new Date($scope.selectedDate.year, $scope.optionMonths.indexOf($scope.selectedDate.month)));
+				console.log(JSON.stringify($scope.range));
 			};
 		}
 	}
