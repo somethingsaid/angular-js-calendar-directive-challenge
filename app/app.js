@@ -28,10 +28,9 @@ myApp.directive('customCalendar', function() {
 
 			// Sense checking
 			$scope.dateChanged = function () {
+				// tied to ng-change in template
 				console.log('Selected Date has changed: ' + JSON.stringify($scope.selectedDate));
 			};
-			console.log('Months: ' +  $scope.optionMonths);
-			console.log('Years: ' +  $scope.optionYears);
 		}
 	}
 });
