@@ -41,6 +41,16 @@ myApp.directive('customCalendar', function() {
     return {
         restrict: 'E',
         templateUrl: 'calendar-directive.html',
-        scope: true
+        scope: true,
+        controller: 'calendarCtrl',
+        link: function(scope, element, attrs) {
+            // need to append child 'cell' elements to make up a 7 column by x rows table for calendar display
+            // this needs to happen on a calendar date change (do a scope.$watch)
+
+            // just doing some sense check
+            element.on('mouseenter', function() {
+                console.log(scope.selectedDate);
+            });
+        }
     }
 });
