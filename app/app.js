@@ -29,11 +29,9 @@ myApp.controller('calendarCtrl', ['$scope', function($scope) {
     // Get calendar range of selected month as user makes selections:
     $scope.dateChanged = function () {
         // tied to ng-change in template
-        console.clear();
         $scope.selectedDate.monthIndex = $scope.optionMonths.indexOf($scope.selectedDate.month);
         console.log('Selected Date has changed: ' + JSON.stringify($scope.selectedDate));
-        $scope.range = CalendarRange.getMonthlyRange(new Date($scope.selectedDate.year, $scope.optionMonths.indexOf($scope.selectedDate.month)));
-        console.log(JSON.stringify($scope.range));
+        $scope.range = CalendarRange.getMonthlyRange(new Date($scope.selectedDate.year, $scope.selectedDate.monthIndex));
     };
 }]);
 
@@ -44,13 +42,21 @@ myApp.directive('customCalendar', function() {
         scope: true,
         controller: 'calendarCtrl',
         link: function(scope, element, attrs) {
-            // need to append child 'cell' elements to make up a 7 column by x rows table for calendar display
-            // this needs to happen on a calendar date change (do a scope.$watch)
+            var calendarContainer = element[0].getElementsByClassName('calendar-container');
+            console.log('The calendar container element: ' + JSON.stringify(calendarContainer));
 
-            // just doing some sense check
-            element.on('mouseenter', function() {
-                console.log(scope.selectedDate);
-            });
+            // Each time scope.selectedDate changes, do something
+            scope.$watch('selectedDate', function(newCollection, oldCollection) {
+                if (newCollection) {
+                    var rangeOfDays = [];
+                    for (var i = 0; i < scope.range.days.length; i++) {
+                        rangeOfDays.push(scope.range.days[i].day);
+                    }
+                    console.log('Data change: ' + JSON.stringify(scope.selectedDate) + ' --> Days in range: ' + rangeOfDays);
+                }
+            }, true);
+            // need to append child 'cell' elements to make up a 7 column by x rows table for calendar display
+            // ng-classes for grey (not current month) and white (current month)
         }
     }
 });
