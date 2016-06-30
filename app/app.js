@@ -30,8 +30,6 @@ myApp.controller('calendarCtrl', ['$scope', function($scope) {
     $scope.dateChanged = function () {
         // tied to ng-change in template
         $scope.selectedDate.monthIndex = $scope.optionMonths.indexOf($scope.selectedDate.month);
-        console.log('Selected Date has changed: ' + JSON.stringify($scope.selectedDate));
-        $scope.range = CalendarRange.getMonthlyRange(new Date($scope.selectedDate.year, $scope.selectedDate.monthIndex));
     };
 }]);
 
@@ -45,14 +43,15 @@ myApp.directive('customCalendar', function() {
             var calendarContainer = element[0].getElementsByClassName('calendar-container');
             console.log('The calendar container element: ' + JSON.stringify(calendarContainer));
 
-            // Each time scope.selectedDate changes, do something
+            // Each time scope.selectedDate changes, update range
             scope.$watch('selectedDate', function(newCollection, oldCollection) {
                 if (newCollection) {
+                    scope.range = CalendarRange.getMonthlyRange(new Date(scope.selectedDate.year, scope.selectedDate.monthIndex));
                     var rangeOfDays = [];
                     for (var i = 0; i < scope.range.days.length; i++) {
                         rangeOfDays.push(scope.range.days[i].day);
                     }
-                    console.log('Data change: ' + JSON.stringify(scope.selectedDate) + ' --> Days in range: ' + rangeOfDays);
+                    console.log('Date change: ' + JSON.stringify(scope.selectedDate) + ' --> Days in range: ' + rangeOfDays);
                 }
             }, true);
             // need to append child 'cell' elements to make up a 7 column by x rows table for calendar display
