@@ -26,9 +26,8 @@ myApp.controller('calendarCtrl', ['$scope', function($scope) {
         $scope.optionYears.push(i);
     }
 
-    // Get calendar range of selected month as user makes selections:
+    // Get calendar range of selected month as user makes selections via ng-change:
     $scope.dateChanged = function () {
-        // tied to ng-change in template
         $scope.selectedDate.monthIndex = $scope.optionMonths.indexOf($scope.selectedDate.month);
     };
 }]);
@@ -41,8 +40,6 @@ myApp.directive('customCalendar', function() {
         controller: 'calendarCtrl',
         link: function(scope, element, attrs) {
             var calendarContainer = angular.element(element[0].querySelector('.calendar-container'));
-            console.log('The calendar container element: ' + calendarContainer.html());
-
             // Each time scope.selectedDate changes: clear html, update range, append html
             scope.$watch('selectedDate', function(newCollection, oldCollection) {
                 if (newCollection) {
@@ -61,8 +58,6 @@ myApp.directive('customCalendar', function() {
                     console.log('Date change: ' + JSON.stringify(scope.selectedDate) + ' --> Days in range: ' + rangeOfDays);
                 }
             }, true);
-            // need to append child 'cell' elements to make up a 7 column by x rows table for calendar display
-            // ng-classes for grey (not current month) and white (current month)
         }
     }
 });
