@@ -20,9 +20,9 @@ myApp.controller('calendarCtrl', ['$scope', function($scope) {
     $scope.range = CalendarRange.getMonthlyRange(new Date(current.year, $scope.optionMonths.indexOf(current.month)));
     console.log('Initial date range: ' + JSON.stringify($scope.range));
 
-    // Provide a range of 40 years in dropdown menu
+    // Provide a range of 100 years in dropdown menu
     $scope.optionYears = [];
-    for (var i = current.year - 20; i <= current.year + 20; i++) {
+    for (var i = current.year - 50; i <= current.year + 50; i++) {
         $scope.optionYears.push(i);
     }
 
