@@ -40,8 +40,8 @@ myApp.directive('customCalendar', function() {
         scope: true,
         controller: 'calendarCtrl',
         link: function(scope, element, attrs) {
-            var calendarContainer = element[0].getElementsByClassName('calendar-container');
-            console.log('The calendar container element: ' + JSON.stringify(calendarContainer));
+            var calendarContainer = angular.element(element[0].querySelector('.calendar-container'));
+            console.log('The calendar container element: ' + calendarContainer.html());
 
             // Each time scope.selectedDate changes, update range
             scope.$watch('selectedDate', function(newCollection, oldCollection) {
@@ -50,6 +50,12 @@ myApp.directive('customCalendar', function() {
                     var rangeOfDays = [];
                     for (var i = 0; i < scope.range.days.length; i++) {
                         rangeOfDays.push(scope.range.days[i].day);
+                        if (scope.range.days[i].month !== scope.selectedDate.monthIndex) {
+                            calendarContainer.append("<div class='cell grey'><p>" + scope.range.days[i].day + "</p></div>");
+                        }
+                        else {
+                           calendarContainer.append("<div class='cell'><p>" + scope.range.days[i].day + "</p></div>"); 
+                        }
                     }
                     console.log('Date change: ' + JSON.stringify(scope.selectedDate) + ' --> Days in range: ' + rangeOfDays);
                 }
