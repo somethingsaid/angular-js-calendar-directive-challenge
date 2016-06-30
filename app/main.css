@@ -3,12 +3,20 @@ body {
 	box-sizing: border-box;
 	width: 98%;
     margin: auto;
+    background-color: black;
 }
 
 *, *:before, *:after {
 	box-sizing: inherit;
 }
 
+.title {
+	color: cornflowerblue;
+}
+
+.nav {
+	padding-bottom: 5px;
+}
 .calendar-container, .calendar-heading {
   display: -webkit-box;
   display: -moz-box;
@@ -22,7 +30,8 @@ body {
 	max-width: 14%;
 	min-width: 14%;
 	border: 1px solid black;
-	height: 150px;
+	height: 130px;
+	background-color: white;
 }
 
 .grey {
