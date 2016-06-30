@@ -43,9 +43,10 @@ myApp.directive('customCalendar', function() {
             var calendarContainer = angular.element(element[0].querySelector('.calendar-container'));
             console.log('The calendar container element: ' + calendarContainer.html());
 
-            // Each time scope.selectedDate changes, update range
+            // Each time scope.selectedDate changes: clear html, update range, append html
             scope.$watch('selectedDate', function(newCollection, oldCollection) {
                 if (newCollection) {
+                    calendarContainer.empty();
                     scope.range = CalendarRange.getMonthlyRange(new Date(scope.selectedDate.year, scope.selectedDate.monthIndex));
                     var rangeOfDays = [];
                     for (var i = 0; i < scope.range.days.length; i++) {

@@ -1,19 +1,20 @@
 /* your css code goes here */
 body {
 	box-sizing: border-box;
+	width: 98%;
+    margin: auto;
 }
 
 *, *:before, *:after {
 	box-sizing: inherit;
 }
 
-.calendar-container {
+.calendar-container, .calendar-heading {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  
   -webkit-flex-flow: row wrap;
 }
 
@@ -21,9 +22,23 @@ body {
 	max-width: 14%;
 	min-width: 14%;
 	border: 1px solid black;
-	height: 200px;
+	height: 150px;
 }
 
 .grey {
 	background-color: grey;
+}
+
+.weekdays {
+	max-width: 14%;
+	min-width: 14%;
+	border: 1px solid black;
+	height: 25px;
+	font-size: 15px;
+	text-align: center;
+	background-color: cornflowerblue;
+}
+
+.weekdays p {
+	margin: 0;
 }
